@@ -6,29 +6,33 @@
     <title>100天AI实战计划</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #6366f1; --orange: #f97316; --blue: #3b82f6;
-            --purple: #8b5cf6; --green: #22c55e; --dark-blue: #1e40af;
-            --gray: #6b7280; --light-gray: #f3f4f6;
-        }
+        :root { --primary: #6366f1; --orange: #f97316; --blue: #3b82f6; --purple: #8b5cf6; --green: #22c55e; --dark-blue: #1e40af; --gray: #6b7280; --light-gray: #f3f4f6; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937; background: #fff; }
         .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
         header { padding: 40px 0; text-align: center; border-bottom: 1px solid #e5e7eb; }
         .logo { font-size: 14px; color: var(--gray); margin-bottom: 16px; }
         h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; background: linear-gradient(135deg, var(--primary), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .subtitle { font-size: 18px; color: var(--gray); max-width: 600px; margin: 0 auto 20px; }
+        
+        .news-banner { background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 12px; padding: 20px; margin: 24px 0; border-left: 4px solid #f59e0b; }
+        .news-banner h3 { font-size: 14px; color: #92400e; margin-bottom: 12px; }
+        .news-item { display: flex; gap: 12px; margin-bottom: 8px; align-items: center; }
+        .news-tag { background: #f59e0b; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; }
+        .news-text { font-size: 14px; color: #1f2937; }
+        
         .stats-banner { display: flex; justify-content: center; gap: 32px; padding: 20px; background: linear-gradient(135deg, #f0f9ff, #eef2ff); border-radius: 12px; margin: 24px 0; }
         .stat-item { text-align: center; }
         .stat-value { font-size: 28px; font-weight: 700; color: var(--primary); }
         .stat-label { font-size: 13px; color: var(--gray); }
+        
         .day-tabs { display: flex; gap: 8px; justify-content: center; padding: 24px 0; flex-wrap: wrap; border-bottom: 1px solid #e5e7eb; }
-        .day-tab { padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; transition: all 0.2s; background: var(--light-gray); color: var(--gray); border: none; }
-        .day-tab:hover { background: #e0e7ff; color: var(--primary); }
+        .day-tab { padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; background: var(--light-gray); color: var(--gray); border: none; }
         .day-tab.current { background: var(--primary); color: white; }
         .day-tab.completed { background: var(--green); color: white; }
+        
         .progress-section { padding: 32px 0; }
         .progress-bar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
-        .progress-segment { flex: 1; transition: opacity 0.3s; }
+        .progress-segment { flex: 1; }
         .progress-segment:first-child { background: var(--orange); }
         .progress-segment:nth-child(2) { background: var(--blue); }
         .progress-segment:nth-child(3) { background: var(--purple); }
@@ -40,11 +44,10 @@
         .phase-label.active { color: #1f2937; font-weight: 600; }
         .phase-label span { display: block; font-size: 11px; margin-top: 4px; }
         
-        /* Modal */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; }
         .modal-overlay.active { display: block; }
-        .modal { max-width: 700px; margin: 40px auto; background: white; border-radius: 16px; max-height: 90vh; overflow-y: auto; }
-        .modal-header { padding: 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: flex-start; position: sticky; top: 0; background: white; z-index: 10; }
+        .modal { max-width: 750px; margin: 40px auto; background: white; border-radius: 16px; max-height: 90vh; overflow-y: auto; }
+        .modal-header { padding: 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; }
         .modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray); }
         .modal-day { font-size: 14px; color: var(--gray); }
         .modal-title { font-size: 24px; font-weight: 700; margin: 8px 0; }
@@ -54,36 +57,37 @@
         .content-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
         .content-section ul { margin-left: 20px; color: #4b5563; }
         .content-section li { margin-bottom: 8px; }
-        .tip-box { background: #f0f9ff; border-left: 4px solid var(--blue); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .action-box { background: #f0fdf4; border-left: 4px solid var(--green); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .link-btn { display: inline-block; padding: 10px 20px; background: var(--primary); color: white; border-radius: 8px; text-decoration: none; font-weight: 500; margin: 8px 8px 8px 0; transition: all 0.2s; }
-        .link-btn:hover { background: #4f46e5; }
-        .link-btn.secondary { background: white; color: var(--primary); border: 1px solid var(--primary); }
+        
+        .theory-box { background: #f8fafc; border-radius: 12px; padding: 20px; margin: 12px 0; }
+        .theory-box h4 { font-size: 15px; color: var(--primary); margin-bottom: 8px; }
+        .theory-box p { font-size: 14px; color: #4b5563; }
+        
+        .tip-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .action-box { background: #dcfce7; border-left: 4px solid #22c55e; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .news-box { background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        
         .check-btn-large { width: 100%; padding: 16px; background: var(--green); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
-        .check-btn-large:hover { background: #16a34a; }
-        .check-btn-large.checked { background: var(--gray); cursor: default; }
+        .check-btn-large.checked { background: var(--gray); }
 
-        /* Cards */
         .days-section { padding: 20px 0 40px; }
         .section-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; }
         .day-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-        .day-card { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; transition: all 0.2s; cursor: pointer; }
-        .day-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(99,102,241,0.1); transform: translateY(-2px); }
-        .day-card.current { border-color: var(--primary); background: #fefeff; }
+        .day-card { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; cursor: pointer; }
+        .day-card:hover { border-color: var(--primary); }
+        .day-card.current { border-color: var(--primary); }
         .day-card.completed { border-color: var(--green); background: #f0fdf4; }
-        .day-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .day-card-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
         .day-number { font-size: 13px; color: var(--gray); }
         .check-icon { width: 24px; height: 24px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
         .day-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
         .day-desc { font-size: 14px; color: var(--gray); margin-bottom: 12px; }
         .day-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-        .day-tag { font-size: 11px; padding: 3px 8px; background: #f3f4f6; border-radius: 4px; color: #6b7280; }
+        .day-tag { font-size: 11px; padding: 3px 8px; background: #f3f4f6; border-radius: 4px; }
         .day-action { font-size: 14px; color: var(--primary); font-weight: 500; }
 
         .resources-section { padding: 40px 0; background: #fafafa; margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
         .resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
-        .resource-card { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .resource-card:hover { border-color: var(--primary); }
+        .resource-card { background: white; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; }
         .resource-name { font-weight: 600; margin-bottom: 6px; }
         .resource-desc { font-size: 13px; color: var(--gray); }
 
@@ -94,15 +98,15 @@
         .path-phase { font-weight: 600; }
         .path-days { font-size: 13px; color: var(--gray); }
         .path-status { font-size: 13px; color: var(--gray); }
-        .path-status.active { color: var(--primary); font-weight: 500; }
+        .path-status.active { color: var(--primary); }
         .path-progress { width: 100px; height: 6px; background: #e5e7eb; border-radius: 3px; margin-top: 6px; }
         .path-progress-bar { height: 100%; background: var(--primary); border-radius: 3px; }
 
-        footer { padding: 40px 0; text-align: center; border-top: 1px solid #e5e7eb; color: var(--gray); font-size: 14px; }
-        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1f2937; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; opacity: 0; transition: all 0.3s; z-index: 1000; }
+        footer { padding: 40px 0; text-align: center; border-top: 1px solid #e5e7eb; color: var(--gray); }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1f2937; color: white; padding: 12px 24px; border-radius: 8px; opacity: 0; transition: all 0.3s; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-        .reset-btn { position: fixed; bottom: 20px; right: 20px; padding: 8px 12px; background: #fee2e2; color: #dc2626; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; opacity: 0.5; }
-        @media (max-width: 640px) { h1 { font-size: 28px; } .subtitle { font-size: 16px; } .day-tabs { gap: 6px; } .day-tab { padding: 6px 12px; font-size: 13px; } .stats-banner { flex-direction: column; gap: 16px; } .modal { margin: 20px; } }
+        
+        @media (max-width: 640px) { h1 { font-size: 28px; } .stats-banner { flex-direction: column; gap: 16px; } }
     </style>
 </head>
 <body>
@@ -110,8 +114,16 @@
         <header>
             <div class="logo">☀️ AI学习平台</div>
             <h1>用100天，把AI变成你的核心生产力</h1>
-            <p class="subtitle">从AI入门到业务实战，每天30分钟。不追热点，只讲能用得上的。</p>
+            <p class="subtitle">体系化学习 + 每日AI资讯，不追热点，只讲能用得上的。</p>
         </header>
+
+        <div class="news-banner">
+            <h3>📰 今日AI资讯 · 2026年3月18日</h3>
+            <div class="news-item"><span class="news-tag">大模型</span><span class="news-text">OpenAI发布GPT-5.2，能力大幅提升</span></div>
+            <div class="news-item"><span class="news-tag">国产</span><span class="news-text">MiniMax新模型发布，API价格进一步降低</span></div>
+            <div class="news-item"><span class="news-tag">应用</span><span class="news-text">AI Agent工作流成为新风口</span></div>
+        </div>
+
         <div class="stats-banner">
             <div class="stat-item"><div class="stat-value" id="completedDays">0</div><div class="stat-label">已完成天数</div></div>
             <div class="stat-item"><div class="stat-value" id="currentStreak">0</div><div class="stat-label">连续打卡</div></div>
@@ -144,7 +156,7 @@
         <div class="resources-section">
             <h2 class="section-title">🛠 必备工具资源</h2>
             <div class="resource-grid">
-                <a href="https://siliconflow.cn" target="_blank" class="resource-card"><div class="resource-name">🇨🇳 硅基流动</div><div class="resource-desc">国产平替API，免费额度</div></a>
+                <a href="https://siliconflow.cn" target="_blank" class="resource-card"><div class="resource-name">🇨🇳 硅基流动</div><div class="resource-desc">国产API平替</div></a>
                 <a href="https://chat.openai.com" target="_blank" class="resource-card"><div class="resource-name">🌐 ChatGPT</div><div class="resource-desc">最强对话AI</div></a>
                 <a href="https://claude.ai" target="_blank" class="resource-card"><div class="resource-name">🎨 Claude</div><div class="resource-desc">编程分析神器</div></a>
                 <a href="https://ollama.com" target="_blank" class="resource-card"><div class="resource-name">💻 Ollama</div><div class="resource-desc">本地大模型</div></a>
@@ -153,7 +165,7 @@
         <div class="path-section">
             <h2 class="section-title">🗺️ 完整学习路径</h2>
             <div class="path-list">
-                <div class="path-item active" id="path1"><div><div class="path-phase" style="color:var(--orange)">第一阶段：认知建立</div><div class="path-days">Day 1-15</div><div class="path-progress"><div class="path-progress-bar" id="pathBar1" style="width:0%"></div></div></div><div class="path-status" id="pathStatus1">进行中 0%</div></div>
+                <div class="path-item active" id="path1"><div><div class="path-phase" style="color:var(--orange)">第一阶段：认知建立</div><div class="path-days">Day 1-15 · AI基础概念与工具入门</div><div class="path-progress"><div class="path-progress-bar" id="pathBar1" style="width:0%"></div></div></div><div class="path-status" id="pathStatus1">进行中 0%</div></div>
                 <div class="path-item" id="path2"><div><div class="path-phase" style="color:var(--blue)">第二阶段：核心技能</div><div class="path-days">Day 16-30</div></div><div class="path-status">即将开始</div></div>
                 <div class="path-item" id="path3"><div><div class="path-phase" style="color:var(--purple)">第三阶段：内容创作</div><div class="path-days">Day 31-50</div></div><div class="path-status">即将开始</div></div>
                 <div class="path-item" id="path4"><div><div class="path-phase" style="color:var(--green)">第四阶段：业务实战</div><div class="path-days">Day 51-75</div></div><div class="path-status">即将开始</div></div>
@@ -163,7 +175,6 @@
         <footer><p>☀️ 100天AI实战计划</p></footer>
     </div>
 
-    <!-- Modal -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-header">
@@ -174,50 +185,81 @@
         </div>
     </div>
     <div class="toast" id="toast">🎉 打卡成功！</div>
-    <button class="reset-btn" onclick="resetProgress()">重置进度</button>
 
     <script>
     const daysData = [
-        {day:1,title:"认识AI：它能做什么",desc:"AI不是魔法，是工具。了解大语言模型的能力边界与局限。",tags:["AI基础","能力边界"],
-            content:{concepts:["AI = 大语言模型(LLM) ≠ 搜索引擎","AI核心能力：理解语言、生成文本、推理思考","AI不能：真正理解世界、自我意识、100%准确"],
-                learn:["了解ChatGPT的发展历程","理解AI为什么会"胡说八道"(幻觉)","了解AI模型是如何训练的"],
-                tips:"AI就像一个超级知识库，它读过海量文字，但并不"懂"这些内容。它能回答问题，是因为统计学上的关联。",
-                actions:["打开ChatGPT或Claude，问几个问题","让AI写一首诗，感受创造力","观察AI何时给出错误答案"]}},
-        {day:2,title:"ChatGPT/Claude上手",desc:"完成你的第一个AI对话，掌握基本操作与提问技巧。",tags:["工具入门","对话技巧"],
-            content:{concepts:["对话式交互：像聊天一样使用AI","提示词(Prompt)=给AI的指令","上下文理解：AI会记住对话内容"],
-                learn:["注册ChatGPT或Claude账号","国内用户可选：硅基流动、文心一言、通义千问","了解免费版vs付费版区别"],
-                tips:"初学者建议从ChatGPT 3.5开始，免费且足够入门。Claude在长文本理解和代码能力上更强。",
-                actions:["完成注册，发送第一条消息","尝试不同类型提问：问答、写作、编程","体验上下文记忆功能"]}},
-        {day:3,title:"Prompt入门：问对问题",desc:"好的提问=好的结果。学会写出有效的提示词。",tags:["Prompt","提问技巧"],
-            content:{concepts:["Prompt=给AI的指令，越清晰越准确","好的Prompt包含：任务、背景、格式要求","迭代优化：一次问不好，问第二次"],
-                learn:["学习BRTRE框架：背景+角色+任务+要求+示例","避免模糊指令，如"帮我写点东西"","指定输出格式：JSON、列表、段落"],
-                tips:'与其说"帮我写文案"，不如说"帮我写一段50字的微信朋友圈文案，推荐一款咖啡产品，语气要亲切自然"。',
-                actions:["用BRTRE框架重写之前的提问","让AI用不同格式输出同一内容","对比：模糊提问 vs 精确提问的效果差异"]}},
-        {day:4,title:"Prompt进阶：角色与格式",desc:"让AI扮演特定角色，输出你需要的格式。",tags:["角色扮演","输出格式"],
-            content:{concepts:["角色扮演：让AI以特定身份回答","Few-shot示例：给AI看几个例子","思维链CoT：让AI展示推理过程"],
-                learn:["学习如何设定角色："你是一位资深产品经理"","Few-shot：给出2-3个输入-输出示例","CoT技巧："请一步步思考""],
-                tips:"角色扮演能让AI的专业度大幅提升。比如让AI扮演面试官、医生、律师等专业人士。",
-                actions:["让AI扮演'资深营销顾问'给出一份推广方案","用Few-shot让AI按你想要的格式输出","尝试CoT方法解决一个复杂问题"]}},
-        {day:5,title:"AI辅助信息处理",desc:"用AI总结长文、分析数据、提取要点，效率翻倍。",tags:["信息提取","数据分析"],
-            content:{concepts:["AI = 超级阅读助手，秒读长文","结构化提取：从非结构化文本中提取关键信息","数据分析：让AI帮你解读数据"],
-                learn:["复制粘贴文章让AI总结要点","让AI从文本中提取：人名、时间、关键数据","上传数据文件让AI分析"],
-                tips:"这是AI对职场人最有价值的技能之一。30分钟的会议记录，AI 10秒就能总结出行动项。",
-                actions:["找一篇长文章，让AI总结3个核心观点","从一段文字中提取所有联系方式","让AI分析一组销售数据的变化趋势"]}},
-        {day:6,title:"AI写作：从大纲到成稿",desc:"让AI帮你写文案、公众号、工作周报。",tags:["AI写作","文案"],
-            content:{concepts:["AI写作 = 超级枪手，帮你起草","人机协作：AI初稿 + 人工润色 = 完美","多风格适应：正式、幽默、专业"],
-                learn:["让AI生成文章大纲","指定风格、长度、受众","AI写完后的人工审核要点"],
-                tips:"AI写作最擅长的是"从0到1"的初稿环节。从1到100的精修，还是需要人来完成。",
-                actions:["让AI写一篇'AI如何帮助中小企业'的公众号文章","用AI写一份周报模板","让AI用3种不同风格写同一产品介绍"]}},
-        {day:7,title:"复盘周：把知识变成自己的",desc:"本周核心回顾+常见问题解答。",tags:["复盘","巩固"],
-            content:{concepts:["费曼学习法：用简单的语言解释复杂概念","实践出真知：光学不用等于没学","建立AI使用习惯"],
-                learn:["Day1-6核心知识点回顾","常见问题解答与避坑指南","建立你的AI工作流"],
-                tips:"今天是休息日，但建议回顾本周学到的内容。试着向朋友解释什么是Prompt，这就叫费曼学习法。",
-                actions:["列出本周学到的3个最重要的知识点","写下你计划在工作中如何使用AI","设置一个AI使用的小目标"]}},
-        {day:8,title:"AI绘图：低成本配图",desc:"用Midjourney/Leonardo生成产品配图和社交媒体素材。",tags:["AI绘图","设计"],
-            content:{concepts:["AI绘图：通过文字描述生成图片","提示词结构：主体+场景+风格+参数","版权说明：AI生成的图片可商用"],
-                learn:["Midjourney：最强AI绘图，但需要Discord","Leonardo.ai：免费且支持Web端","国内的：通义万相、文心一格"],
-                tips:"AI绘图的精髓在于迭代。一个好的图片往往需要多次调整提示词才能得到。",
-                actions:["在Leonardo.ai注册账号","用英文描述生成一张产品图","尝试不同风格关键词：3D渲染、摄影风、插画风"]}}
+        {day:1,title:"认识AI本质",desc:"理解AI不是什么，理解AI是什么，建立正确认知。",tags:["认知","基础","本质"],
+            content:{theory:[
+                {title:"AI不是搜索引擎",content:"AI通过学习海量文本建立的是『概率关联』而非『知识记忆』。它不知道什么是对的，只知道什么更可能对。"},
+                {title:"AI的能力边界",content:"AI擅长：模式识别、信息整合、创意生成。不擅长：数学计算、实时信息、自我认知。"},
+                {title:"大语言模型原理",content:"输入文字→模型预测下一个最可能的字→输出。这是一个超级『文字接龙』游戏，而不是真的有理解能力。"}
+            ],concepts:["AI = 大语言模型(LLM) ≠ 搜索引擎","AI核心能力来自大规模训练","AI的『幻觉』是特性不是bug"],
+                learn:["理解为什么AI会『一本正经地胡说八道』","了解监督学习与强化学习","区分AI的擅长与不擅长"],
+                tips:"记住一个比喻：AI就像一个读过全世界图书馆的『记忆冠军』，但它并不『理解』任何一本书。",
+                news:"OpenAI发布GPT-5.2，能力大幅提升；国产模型API价格持续下降"}},
+        {day:2,title:"AI工具生态",desc:"主流AI工具介绍与选择，国内外工具对比。",tags:["工具","生态","选择"],
+            content:{theory:[
+                {title:"国外主流工具",content:"ChatGPT：生态最完善；Claude：长文本理解强；Gemini：Google亲儿子多模态强。"},
+                {title:"国内平替工具",content:"硅基流动：API价格最低；文心一言：百度中文理解好；通义千问：阿里免费可用；Kimi：长文本处理优秀。"},
+                {title:"如何选择",content:"个人用户：ChatGPT/Claude优先。开发者：看API性价比。学生：先用免费版。"}
+            ],concepts:["工具没有最好，只有最适合","免费版足够入门","API调用是进阶能力"],
+                learn:["注册至少2个AI工具账号","了解免费版vs付费版的区别","学会科学上网或选择国产工具"],
+                tips:"建议同时体验ChatGPT和Claude，感受两者在回答风格上的差异。",
+                news:"Claude推出新功能支持更长上下文；国产AI API价格战持续"}},
+        {day:3,title:"Prompt入门",desc:"什么是Prompt，如何写出有效的指令。",tags:["Prompt","技巧","核心技能"],
+            content:{theory:[
+                {title:"Prompt的本质",content:"Prompt就是你给AI的『指令』。AI会严格按照你的指令执行，所以指令越清晰，结果越准确。"},
+                {title:"好Prompt的要素",content:"1.明确任务 2.提供背景 3.指定格式 4.设定约束。模糊的输入=模糊的输出。"},
+                {title:"基础框架BRTRE",content:"Background(背景)+Role(角色)+Task(任务)+Requirements(要求)+Example(示例)。"}
+            ],concepts:["Prompt是人与AI沟通的唯一桥梁","越具体越好","迭代优化是常态"],
+                learn:["理解BRTRE框架的每个要素","练习将模糊需求转化为具体Prompt","掌握指定输出格式的技巧"],
+                tips:'与其说"帮我写文案"，不如说"帮我写一段50字的微信朋友圈文案，推荐咖啡产品，语气亲切自然"。',
+                news:"OpenAI推出Prompt优化工具"}},
+        {day:4,title:"Prompt进阶",desc:"角色扮演、Few-shot、思维链等高级技巧。",tags:["进阶","技巧","高级Prompt"],
+            content:{theory:[
+                {title:"角色扮演",content:'让AI扮演特定角色可以大幅提升专业度。你可以设定："你是一位有10年经验的产品经理"。'},
+                {title:"Few-shot示例",content:"给出2-3个输入-输出示例，让AI理解你想要的具体格式和风格。这比纯文字描述更准确。"},
+                {title:"思维链CoT",content:"让AI『一步步思考』，展示推理过程。这不仅能提高答案质量，还能让你理解AI是如何得出结论的。"}
+            ],concepts:["角色设定是提升质量的利器","示例比描述更精准","CoT让AI的思考可解释"],
+                learn:["掌握角色设定的语法","学会设计Few-shot示例","理解CoT的使用场景"],
+                tips:"角色扮演的精髓在于给出足够具体的角色描述。",
+                news:"研究显示CoT提示词可以让小模型达到大模型的推理水平"}},
+        {day:5,title:"AI信息处理",desc:"用AI秒读长文、分析数据、提取关键信息。",tags:["效率","信息处理","办公"],
+            content:{theory:[
+                {title:"AI = 超级阅读助手",content:"30分钟的会议记录，AI 10秒就能总结出核心观点和行动项。这是AI对职场人最有价值的技能之一。"},
+                {title:"结构化提取",content:"从非结构化文本中提取关键信息：人名、时间、数字、联系方式等。"},
+                {title:"数据分析辅助",content:"AI可以帮助分析Excel/CSV数据，解读趋势、发现异常、给出建议。不需要会编程。"}
+            ],concepts:["AI不会读心术，但会读文章","结构化提取是提效利器","数据分析不需要Python"],
+                learn:["掌握长文总结的Prompt技巧","学会信息提取的多种玩法","了解AI分析数据的能力边界"],
+                tips:'关键是"明确你要什么"。',
+                news:"Notion AI推出新功能支持会议实时转录和总结"}},
+        {day:6,title:"AI写作实战",desc:"从大纲到成稿，AI辅助写作的完整流程。",tags:["写作","内容","文案"],
+            content:{theory:[
+                {title:"AI写作的定位",content:"AI是『超级枪手』，帮你完成从0到1的初稿。从1到100的精修，还是需要人来完成。AI负责速度，人类负责质量。"},
+                {title:"写作流程",content:"1.确定主题 2.AI生成大纲 3.人类确认框架 4.AI填充内容 5.人类修改润色 6.最终定稿。"},
+                {title:"风格控制",content:"通过Prompt可以控制写作风格：正式/口语、专业/通俗、幽默/严肃。"}
+            ],concepts:["AI擅长初稿，人类擅长精修","大纲确认是关键步骤","风格控制是核心竞争力"],
+                learn:["掌握从大纲到成稿的完整流程","学会控制AI写作的风格","理解AI写作的局限性"],
+                tips:"AI写的东西往往『正确但平庸』。想要出彩，需要人类在创意、洞察、情感这些AI缺乏的维度发力。",
+                news:"AI写作工具月活突破1亿，内容创作者使用率超过60%"}},
+        {day:7,title:"复盘与习惯",desc:"本周核心回顾，建立AI使用习惯。",tags:["复盘","习惯","总结"],
+            content:{theory:[
+                {title:"费曼学习法",content:"用简单的语言解释复杂概念给一个不懂的人听。如果你讲不明白，说明你还没真正理解。"},
+                {title:"建立AI工作流",content:"把AI融入日常工作：早上用AI读新闻、写日程，白天用AI处理邮件、回复消息，晚上用AI写总结、学新知。"},
+                {title:"持续学习策略",content:"AI领域变化快，不要追热点但要保持关注。每周花30分钟了解AI动态即可。"}
+            ],concepts:["复盘是进步的阶梯","习惯需要刻意培养","持续关注而非追热点"],
+                learn:["列出本周学到的3个最重要的知识点","写下你计划在工作中如何使用AI","设置一个AI使用的小目标"],
+                tips:"今天是休息日，试着向朋友解释Prompt是什么，这就叫费曼学习法。",
+                news:"本周AI要闻回顾：GPT-5.2发布、Claude能力增强"}},
+        {day:8,title:"AI绘图入门",desc:"低成本配图方案，Midjourney/Leonardo使用。",tags:["绘图","设计","视觉"],
+            content:{theory:[
+                {title:"AI绘图原理",content:"通过文字描述生成图片。提示词结构：主体 + 场景 + 风格 + 构图 + 参数。"},
+                {title:"主流工具对比",content:"Midjourney：效果最好但需要Discord；Leonardo.ai：免费且Web端可用；国内：通义万相、文心一格免费可用。"},
+                {title:"商业使用说明",content:"主流AI生成的图片可商用，但建议做二次加工以降低相似风险。"}
+            ],concepts:["提示词是AI绘图的核心","迭代是获得好图的关键","版权问题需要关注"],
+                learn:["掌握提示词的基本结构","了解不同风格的关键词","学会图生图技巧"],
+                tips:"AI绘图的精髓在于迭代。",
+                news:"Midjourney V7发布，细节表现大幅提升"}}
     ];
 
     const STORAGE_KEY = 'ai_learning_progress';
@@ -225,7 +267,6 @@
     function saveProgress(p) { localStorage.setItem(STORAGE_KEY,JSON.stringify(p)); }
     function checkIn(day) { const p=getProgress(); if(!p.completedDays.includes(day)){p.completedDays.push(day); const t=new Date().toDateString(); if(p.lastCheckDate){const d=Math.floor((new Date(t)-new Date(p.lastCheckDate))/(864e5)); p.currentStreak=(d===1?p.currentStreak+1:d>1?1:p.currentStreak);}else p.currentStreak=1; p.lastCheckDate=t; saveProgress(p); showToast('🎉 打卡成功！'); renderAll(); } }
     function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000); }
-    function resetProgress(){ localStorage.removeItem(STORAGE_KEY); showToast('进度已重置'); renderAll(); }
 
     function openModal(day){
         const d=daysData.find(x=>x.day===day); if(!d)return;
@@ -233,11 +274,13 @@
         document.getElementById('modalTitle').textContent=d.title;
         document.getElementById('modalDesc').textContent=d.desc;
         let html='';
-        if(d.content.concepts){html+=`<div class="content-section"><h3>📖 核心概念</h3><ul>${d.content.concepts.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;}
+        if(d.content.theory){html+=`<div class="content-section"><h3>📖 理论基础</h3>`;
+            d.content.theory.forEach(t=>{html+=`<div class="theory-box"><h4>${t.title}</h4><p>${t.content}</p></div>`;});html+=`</div>`;}
+        if(d.content.concepts){html+=`<div class="content-section"><h3>💡 核心概念</h3><ul>${d.content.concepts.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;}
         if(d.content.learn){html+=`<div class="content-section"><h3>📚 知识点</h3><ul>${d.content.learn.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;}
         if(d.content.tips){html+=`<div class="tip-box"><strong>💡 提示：</strong>${d.content.tips}</div>`;}
+        if(d.content.news){html+=`<div class="news-box"><strong>📰 今日资讯：</strong>${d.content.news}</div>`;}
         if(d.content.actions){html+=`<div class="action-box"><strong>🎯 今日任务：</strong><ul>${d.content.actions.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;}
-        if(d.content.links){html+=`<div class="content-section"><h3>🔗 相关链接</h3>${d.content.links.map(l=>`<a href="${l.url}" target="_blank" class="link-btn">${l.name}</a>`).join('')}</div>`;}
         const p=getProgress();
         const isDone=p.completedDays.includes(day);
         html+=`<button class="check-btn-large ${isDone?'checked':''}" ${isDone?'disabled':''} onclick="checkIn(${day})">${isDone?'✓ 已打卡':'✅ 打卡完成今日学习'}</button>`;
@@ -254,7 +297,7 @@
         document.querySelectorAll('.day-tab').forEach(t=>{const d=parseInt(t.dataset.day);t.classList.remove('current','completed');if(c.includes(d))t.classList.add('completed');else if(d===c.length+1||(c.length===0&&d===1))t.classList.add('current');});
         const ph1=c.filter(d=>d>=1&&d<=15).length;
         document.getElementById('pathBar1').style.width=Math.min(100,ph1*100/15)+'%';
-        document.getElementById('pathStatus1').textContent=ph1>0?`进行中 ${Math.round(ph1*100/15)}%`:'即将开始';
+        document.getElementById('pathStatus1').textContent=ph1>0?`进行中 ${Math.round(ph1*100/15)}%`:'';
         for(let i=1;i<=5;i++){document.getElementById('seg'+i).classList.add('coming');document.getElementById('phase'+i).classList.remove('active');document.getElementById('path'+i).classList.remove('active');}
         let cp=1;if(c.length>=76)cp=5;else if(c.length>=51)cp=4;else if(c.length>=31)cp=3;else if(c.length>=16)cp=2;
         document.getElementById('seg'+cp).classList.remove('coming');
