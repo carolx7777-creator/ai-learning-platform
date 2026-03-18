@@ -10,59 +10,57 @@
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1f2937; background: #fff; }
         .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
         
-        /* Header */
         header { padding: 48px 0 32px; text-align: center; }
         h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; background: linear-gradient(135deg, var(--primary), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .subtitle { font-size: 16px; color: var(--gray); }
         
-        /* Stats */
         .stats-banner { display: flex; justify-content: center; gap: 40px; padding: 20px; background: linear-gradient(135deg, #f0f9ff, #eef2ff); border-radius: 12px; margin: 24px 0; }
         .stat-item { text-align: center; }
         .stat-value { font-size: 24px; font-weight: 700; color: var(--primary); }
         .stat-label { font-size: 12px; color: var(--gray); }
         
-        /* Timeline */
         .timeline { display: flex; justify-content: space-between; padding: 20px 0; border-bottom: 1px solid #e5e7eb; margin-bottom: 24px; }
-        .timeline-item { text-align: center; flex: 1; cursor: pointer; padding: 8px; border-radius: 8px; transition: all 0.2s; }
-        .timeline-item:hover { background: #f3f4f6; }
+        .timeline-item { text-align: center; flex: 1; cursor: pointer; padding: 8px; border-radius: 8px; }
         .timeline-item.active { background: #e0e7ff; }
         .timeline-phase { font-size: 14px; font-weight: 600; color: var(--gray); }
         .timeline-item.active .timeline-phase { color: var(--primary); }
         .timeline-days { font-size: 12px; color: #9ca3af; }
         
-        /* Day Tabs */
         .day-tabs { display: flex; gap: 6px; justify-content: center; padding: 16px 0; flex-wrap: wrap; }
         .day-tab { padding: 6px 12px; border-radius: 6px; font-size: 13px; background: var(--light-gray); color: var(--gray); border: none; cursor: pointer; }
         .day-tab.current { background: var(--primary); color: white; }
         .day-tab.completed { background: var(--green); color: white; }
+        .day-tab.locked { opacity: 0.5; cursor: not-allowed; }
         
-        /* Modules */
+        .current-day-header { text-align: center; padding: 24px 0; border-bottom: 1px solid #e5e7eb; margin-bottom: 24px; }
+        .current-day-label { font-size: 13px; color: var(--gray); }
+        .current-day-title { font-size: 24px; font-weight: 700; margin: 8px 0; }
+        
         .module { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 16px; cursor: pointer; transition: all 0.2s; }
         .module:hover { border-color: var(--primary); }
-        .module-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .module-header { display: flex; justify-content: space-between; align-items: center; }
         .module-icon { font-size: 18px; margin-right: 8px; }
         .module-title { font-size: 16px; font-weight: 600; }
         .module-arrow { color: #9ca3af; }
-        .module-desc { font-size: 14px; color: var(--gray); }
+        .module-desc { font-size: 14px; color: var(--gray); margin-top: 8px; }
         
-        /* Modal */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; }
         .modal-overlay.active { display: block; }
         .modal { max-width: 700px; margin: 40px auto; background: white; border-radius: 16px; max-height: 90vh; overflow-y: auto; }
         .modal-header { padding: 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: white; z-index: 10; }
         .modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray); }
         .modal-day { font-size: 14px; color: var(--gray); }
-        .modal-title { font-size: 22px; font-weight: 700; }
+        .modal-title { font-size: 20px; font-weight: 700; }
         .modal-content { padding: 24px; }
         
         .detail-section { margin-bottom: 24px; }
         .detail-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--primary); }
-        .detail-section p { font-size: 14px; color: #4b5563; line-height: 1.7; margin-bottom: 12px; }
+        .detail-section p { font-size: 14px; color: #4b5563; line-height: 1.7; }
         .detail-section ul { margin-left: 20px; color: #4b5563; }
         .detail-section li { margin-bottom: 8px; }
         
         .case-item { background: #f9fafb; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
-        .case-title { font-weight: 600; margin-bottom: 6px; }
+        .case-title { font-weight: 600; margin-bottom: 4px; }
         .case-desc { font-size: 13px; color: var(--gray); }
         
         .homework-box { background: #dcfce7; border-radius: 8px; padding: 16px; }
@@ -76,8 +74,11 @@
         footer { padding: 32px 0; text-align: center; color: var(--gray); font-size: 13px; border-top: 1px solid #e5e7eb; margin-top: 40px; }
         .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1f2937; color: white; padding: 12px 24px; border-radius: 8px; opacity: 0; transition: all 0.3s; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        
+        .locked-tip { text-align: center; padding: 40px; color: var(--gray); }
+        .locked-tip span { display: block; font-size: 24px; margin-bottom: 8px; }
 
-        @media (max-width: 640px) { h1 { font26px; } .stats-banner { gap: 20px; } .timeline { flex-wrap: wrap; gap: 8px; } .timeline-item { flex: none; width: 32%; } }
+        @media (max-width: 640px) { .timeline { flex-wrap: wrap; gap: 8px; } .timeline-item { width: 32%; } }
     </style>
 </head>
 <body>
@@ -101,12 +102,14 @@
             <div class="timeline-item" data-phase="5"><div class="timeline-phase">复盘</div><div class="timeline-days">Day 76-100</div></div>
         </div>
 
-        <div class="day-tabs" id="dayTabs">
-            <button class="day-tab" data-day="1">Day 1</button><button class="day-tab" data-day="2">Day 2</button><button class="day-tab" data-day="3">Day 3</button><button class="day-tab" data-day="4">Day 4</button>
-            <button class="day-tab" data-day="5">Day 5</button><button class="day-tab" data-day="6">Day 6</button><button class="day-tab" data-day="7">Day 7</button><button class="day-tab" data-day="8">Day 8</button>
+        <div class="day-tabs" id="dayTabs"></div>
+
+        <div class="current-day-header">
+            <div class="current-day-label">今日学习</div>
+            <div class="current-day-title" id="currentDayTitle">Day 1 · 认识AI本质</div>
         </div>
 
-        <div id="modules" style="margin-top: 24px;">
+        <div id="modules">
             <div class="module" onclick="openModal('concept')">
                 <div class="module-header"><span><span class="module-icon">🧠</span><span class="module-title">核心概念</span></span><span class="module-arrow">→</span></div>
                 <div class="module-desc">每天一个AI核心理论知识，点击查看详细讲解</div>
@@ -125,13 +128,13 @@
             </div>
         </div>
 
-        <footer><p>☀️ 100天AI实战计划</p></footer>
+        <footer><p>☀️ 100天AI实战计划 · 每日更新</p></footer>
     </div>
 
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-header">
-                <div><div class="modal-day" id="modalDay">Day 1</div><h2 class="modal-title" id="modalTitle"></h2></div>
+                <div><div class="modal-day" id="modalDay"></div><h2 class="modal-title" id="modalTitle"></h2></div>
                 <button class="modal-close" onclick="closeModal()">×</button>
             </div>
             <div class="modal-content" id="modalContent"></div>
@@ -140,48 +143,84 @@
     <div class="toast" id="toast">🎉 打卡成功！</div>
 
     <script>
-    const daysData = [
-        {day:1,title:"认识AI本质",phase:1,
-            concept:{title:"AI不是搜索引擎",points:["AI通过海量文本学习的是『概率关联』而非『知识记忆』","它不知道什么是对的，只知道什么更可能对","AI的『幻觉』是特性不是bug"]},
+    // 100天课程数据 - 第一阶段（认知建立 Day 1-15）
+    const courseData = {
+        1: {title:"认识AI本质",phase:1,
+            concept:{title:"AI不是搜索引擎",points:["AI通过海量文本学习的是『概率关联』而非『知识记忆』","它不知道什么是对的，只知道什么更可能对","AI的『幻觉』是特性不是bug，而是概率模型的必然结果"]},
             news:{items:["OpenAI发布GPT-5.2，能力大幅提升","MiniMax新模型发布，API价格进一步降低","AI Agent工作流成为新风口"]},
-            cases:[{title:"ChatGPT",desc:"对话式AI，生态最完善"},{"title:"Claude",desc:"长文本理解强，编程神器"},{"title:"Midjourney",desc:"AI绘图领域的标杆产品"},{"title:"Notion AI",desc:"AI辅助写作，文档处理"},{"title:"Copilot",desc:"微软AI编程助手"}],
+            cases:[{title:"ChatGPT",desc:"对话式AI，生态最完善","type":"软件"},{title:"Claude",desc:"长文本理解强，编程神器","type":"软件"},{title:"Midjourney",desc:"AI绘图领域标杆","type":"软件"},{title:"Notion AI",desc:"AI辅助写作","type":"软件"},{title:"Copilot",desc:"微软AI编程助手","type":"软件"}],
             homework:{title:"体验对话AI",desc:"注册ChatGPT或Claude，向它提3个你工作中的实际问题，感受AI的能力边界。"}},
-        {day:2,title:"AI工具生态",phase:1,
+        2: {title:"AI工具生态",phase:1,
             concept:{title:"主流AI工具对比",points:["国外：ChatGPT生态最全，Claude编程强，Gemini多模态","国内：硅基流动API便宜，文心一言中文好，通义千问免费","选择建议：个人用户ChatGPT/Claude，开发者看API性价比"]},
             news:{items:["Claude推出超长上下文功能","国产AI API价格持续下降","Kimi长文本处理获好评"]},
-            cases:[{title:"硅基流动",desc:"国产API平台，免费额度充足"},{"title:"文心一言",desc:"百度出品，中文理解优秀"},{"title:"通义千问",desc:"阿里免费可用"},{"title:"Kimi",desc:"长文本处理黑马"},{"title:"Gemini",desc:"Google多模态AI"}],
+            cases:[{title:"硅基流动",desc:"国产API平台，免费额度充足","type":"工具"},{title:"文心一言",desc:"百度出品，中文理解优秀","type":"工具"},{title:"通义千问",desc:"阿里免费可用","type":"工具"},{title:"Kimi",desc:"长文本处理黑马","type":"工具"},{title:"Gemini",desc:"Google多模态AI","type":"工具"}],
             homework:{title:"工具对比体验",desc:"分别用ChatGPT和国产工具回答同一个问题，对比回答质量的差异。"}},
-        {day:3,title:"Prompt入门",phase:1,
-            concept:{title:"Prompt是AI沟通的桥梁",points:["Prompt=给AI的指令，越清晰越准确","好Prompt要素：任务+背景+格式+约束","BRTRE框架：背景+角色+任务+要求+示例"]},
+        3: {title:"Prompt入门",phase:1,
+            concept:{title:"Prompt是AI沟通的桥梁",points:["Prompt=给AI的指令，越清晰越准确","好Prompt要素：任务+背景+格式+约束","BRTRE框架：背景(Background)+角色(Role)+任务(Task)+要求(Requirements)+示例(Example)"]},
             news:{items:["OpenAI推出官方Prompt优化指南","提示词工程成为新职业方向"]},
-            cases:[{title:"BRTRE框架",desc:"写Prompt的万能公式"},{"title:"角色扮演",desc:"让AI扮演专家回答"},{"title:"格式指定",desc:"JSON、列表、段落等"},{"title:" Few-shot",desc:"给示例引导输出"},{"title:"迭代优化",desc:"多次提问获得更好结果"}],
+            cases:[{title:"BRTRE框架",desc:"写Prompt的万能公式","type":"方法"},{title:"角色扮演",desc:"让AI扮演专家回答","type":"方法"},{title:"格式指定",desc:"JSON、列表、段落等","type":"方法"},{title:"Few-shot",desc:"给示例引导输出","type":"方法"},{title:"迭代优化",desc:"多次提问获得更好结果","type":"方法"}],
             homework:{title:"写出好Prompt",desc:"用BRTRE框架，针对你工作中的一个问题写出详细的Prompt，并对比效果差异。"}},
-        {day:4,title:"Prompt进阶",phase:1,
+        4: {title:"Prompt进阶",phase:1,
             concept:{title:"高级Prompt技巧",points:["角色扮演：设定专家身份大幅提升专业度","Few-shot：给2-3个示例让AI理解需求","思维链CoT：让AI展示推理过程"]},
             news:{items:["研究显示CoT可让小模型达到大模型效果"]},
-            cases:[{title:"面试官AI",desc:"扮演资深面试官进行模拟面试"},{"title:"律师AI",desc:"法律咨询辅助工具"},{"title:"医生AI",desc:"健康咨询助手"},{"title:"教师AI",desc:"作业辅导与答疑"},{"title:"顾问AI",desc:"商业咨询建议"}],
+            cases:[{title:"面试官AI",desc:"扮演资深面试官进行模拟面试","type":"应用"},{title:"律师AI",desc:"法律咨询辅助工具","type":"应用"},{title:"医生AI",desc:"健康咨询助手","type":"应用"},{title:"教师AI",desc:"作业辅导与答疑","type":"应用"},{title:"顾问AI",desc:"商业咨询建议","type":"应用"}],
             homework:{title:"角色扮演实践",desc:"让AI扮演你所在领域的资深专家，帮你解决一个具体问题。"}},
-        {day:5,title:"AI信息处理",phase:1,
+        5: {title:"AI信息处理",phase:1,
             concept:{title:"AI是超级阅读助手",points:["30分钟会议记录，AI 10秒总结核心要点","结构化提取：人名、时间、数据、联系方式","数据分析：无需编程，AI帮你解读Excel"]},
             news:{items:["Notion AI支持会议实时转录"]},
-            cases:[{title:"会议纪要",desc:"自动提取行动项和决策"},{"title:"文章总结",desc:"长文秒读要点"},{"title:"数据提取",desc:"从文本中提取结构化信息"},{"title:"趋势分析",desc:"销售数据变化解读"},{"title:"竞品分析",desc:"对比多产品差异"}],
+            cases:[{title:"会议纪要",desc:"自动提取行动项和决策","type":"场景"},{title:"文章总结",desc:"长文秒读要点","type":"场景"},{title:"数据提取",desc:"从文本中提取结构化信息","type":"场景"},{title:"趋势分析",desc:"销售数据变化解读","type":"场景"},{title:"竞品分析",desc:"对比多产品差异","type":"场景"}],
             homework:{title:"AI读文档",desc:"找一篇你工作中的长文档，让AI帮你总结3个核心观点。"}},
-        {day:6,title:"AI写作实战",phase:1,
+        6: {title:"AI写作实战",phase:1,
             concept:{title:"AI写作的定位",points:["AI是超级枪手，擅长从0到1的初稿","人类负责从1到100的精修","关键在创意、洞察、情感维度"]},
             news:{items:["AI写作工具月活突破1亿"]},
-            cases:[{title:"周报生成",desc:"AI写工作周报模板"},{"title:"文案创作",desc:"广告文案、社交媒体"},{"title:"邮件回复",desc:"商务邮件智能回复"},{"title:"文章润色",desc:"语法检查与优化"},{"title:"大纲生成",desc:"文章结构快速梳理"}],
+            cases:[{title:"周报生成",desc:"AI写工作周报模板","type":"场景"},{title:"文案创作",desc:"广告文案、社交媒体","type":"场景"},{title:"邮件回复",desc:"商务邮件智能回复","type":"场景"},{title:"文章润色",desc:"语法检查与优化","type":"场景"},{title:"大纲生成",desc:"文章结构快速梳理","type":"场景"}],
             homework:{title:"AI辅助写作",desc:"让AI帮你写一篇你工作相关的主题，对比AI初稿和你最终版本的差异。"}},
-        {day:7,title:"复盘与习惯",phase:1,
+        7: {title:"复盘与习惯",phase:1,
             concept:{title:"费曼学习法",points:["用简单语言解释复杂概念给外行听","讲不明白=没真正理解","把AI融入日常工作流"]},
             news:{items:["本周AI要闻回顾：GPT-5.2发布"]},
-            cases:[{title:"晨间AI",desc:"用AI读新闻写日程"},{"title:"午间AI",desc:"用AI处理邮件消息"},{"title:"晚间AI",desc:"用AI写总结学新知"},{"title:"随时AI",desc:"遇到问题先问AI"},{"title:"每周AI",desc:"周复盘AI使用情况"}],
+            cases:[{title:"晨间AI",desc:"用AI读新闻写日程","type":"工作流"},{title:"午间AI",desc:"用AI处理邮件消息","type":"工作流"},{title:"晚间AI",desc:"用AI写总结学新知","type":"工作流"},{title:"随时AI",desc:"遇到问题先问AI","type":"工作流"},{title:"每周AI",desc:"周复盘AI使用情况","type":"工作流"}],
             homework:{title:"制定AI工作流",desc:"列出3个你工作中可以用AI的场景，制定未来2周的AI使用计划。"}},
-        {day:8,title:"AI绘图入门",phase:1,
+        8: {title:"AI绘图入门",phase:1,
             concept:{title:"AI绘图原理",points:["通过文字描述生成图片","提示词结构：主体+场景+风格+参数","主流工具：Midjourney效果最好，Leonardo免费"]},
             news:{items:["Midjourney V7发布"]},
-            cases:[{title:"产品配图",desc:"电商店铺产品图"},{"title:"社交素材",desc:"朋友圈、海报配图"},{"title:"文章插图",desc:"公众号文章配图"},{"title:"Logo设计",desc:"品牌标识初稿"},{"title:"PPT配图",desc:"演示文稿插图"}],
-            homework:{title:"生成第一张AI图",desc:"在Leonardo.ai用英文描述生成一张产品或文章配图。"}}
-    ];
+            cases:[{title:"产品配图",desc:"电商店铺产品图","type":"应用"},{title:"社交素材",desc:"朋友圈、海报配图","type":"应用"},{title:"文章插图",desc:"公众号文章配图","type":"应用"},{title:"Logo设计",desc:"品牌标识初稿","type":"应用"},{title:"PPT配图",desc:"演示文稿插图","type":"应用"}],
+            homework:{title:"生成第一张AI图",desc:"在Leonardo.ai用英文描述生成一张产品或文章配图。"}},
+        9: {title:"AI视频生成",phase:1,
+            concept:{title:"AI视频的发展",points:["视频生成是AI最新突破方向","主流工具：Runway、Pika、腾讯智影","当前能力：文生视频、图生视频、视频编辑"]},
+            news:{items:["Runway发布新一代视频生成模型","Sora开放公测"]},
+            cases:[{title:"Runway",desc:"视频生成领域的领导者","type":"工具"},{title:"Pika",desc:"快速生成短视频","type":"工具"},{title:"腾讯智影",desc:"国产视频AI工具","type":"工具"},{title:"HeyGen",desc:"数字人视频","type":"工具"},{title:"Luma",desc:"视频生成新秀","type":"工具"}],
+            homework:{title:"体验AI视频",desc:"在Runway或Pika生成一个5秒的短视频。"}},
+        10: {title:"AI与数据分析",phase:1,
+            concept:{title:"AI数据分析入门",points:["无需编程，AI帮你分析数据","自动识别趋势、异常值","生成可视化图表和解读报告"]},
+            news:{items:["Excel Copilot全面开放"]},
+            cases:[{title:"Excel AI",desc:"Microsoft 365 Copilot","type":"工具"},{title:"Tableau AI",desc:"智能数据分析","type":"工具"},{title:"Power BI",desc:"微软商业智能","type":"工具"},{title:"Looker",desc:"Google数据分析","type":"工具"},{title:"阿里云DataV",desc:"可视化大屏","type":"工具"}],
+            homework:{title:"AI分析数据",desc:"找一个数据文件（Excel/CSV），让AI帮你分析并解读趋势。"}},
+        11: {title:"AI与搜索引擎",phase:1,
+            concept:{title:"AI搜索 vs 传统搜索",points:["AI搜索直接给出答案，而非链接列表","信息来源可追溯，可追问","代表工具：Perplexity、Arc Search"]},
+            news:{items:["Perplexity估值飙升","Arc Search用户增长迅速"]},
+            cases:[{title:"Perplexity",desc:"AI搜索代表产品","type":"工具"},{title:"Arc Search",desc:"Browser Company新品","type":"工具"},{title:"360AI搜索",desc:"国产AI搜索","type":"工具"},{title:"秘塔AI搜索",desc:"无广告AI搜索","type":"工具"},{title:"百度AI搜索",desc:"传统搜索AI升级","type":"工具"}],
+            homework:{title:"体验AI搜索",desc:"用Perplexity或国产AI搜索工具搜一个专业问题，对比与传统搜索的差异。"}},
+        12: {title:"AI学习辅助",phase:1,
+            concept:{title:"AI作为学习助手",points:["AI可以当私人导师，24小时答疑","解释概念、辅导作业、制定学习计划","语言学习、编程学习都可以用AI辅助"]},
+            news:{items:["Khan Academy推出AI导师Khanmigo"]},
+            cases:[{title:"Khanmigo",desc:"AI数学辅导","type":"应用"},{title:"Duolingo",desc:"AI语言学习","type":"应用"},{title:"GitHub Copilot",desc:"编程学习辅助","type":"应用"},{title:"ChatPDF",desc:"论文阅读助手","type":"应用"},{title:"Quizlet",desc:"AI备课神器","type":"应用"}],
+            homework:{title:"AI当导师",desc:"让AI用你听得懂的方式解释一个你一直不太理解的概念。"}},
+        13: {title:"AI与创意设计",phase:1,
+            concept:{title:"AI设计工具一览",points:["海报、PPT、Logo都可以用AI生成","AI不是替代设计师，而是提升效率","人机协作是未来主流"]},
+            news:{items:["Canva AI功能全面更新"]},
+            cases:[{title:"Canva",desc:"在线设计+AI功能","type":"工具"},{title:"Gamma",desc:"AI生成PPT","type":"工具"},{title:"Beautiful.ai",desc:"AI演示文稿","type":"工具"},{title:"Midjourney",desc:"专业AI绘图","type":"工具"},{title:"Figma AI",desc:"UI设计AI辅助","type":"工具"}],
+            homework:{title:"AI做设计",desc:"用Gamma或Canva AI生成一个工作汇报PPT。"}},
+        14: {title:"AI办公套件",phase:1,
+            concept:{title:"AI赋能传统办公",points:["文档、表格、演示、会议都被AI改变","Microsoft 365 Copilot、Google Workspace AI","国产：WPS AI、钉钉AI"]},
+            news:{items:["WPS AI全面开放"]},
+            cases:[{title:"Microsoft 365",desc:"Word/Excel/PPT AI","type":"工具"},{title:"Google Workspace",desc:"文档AI升级","type":"工具"},{title:"WPS AI",desc:"国产办公AI","type":"工具"},{title:"钉钉AI",desc:"企业协作AI","type":"工具"},{title:"飞书AI",desc:"字节企业工具","type":"工具"}],
+            homework:{title:"AI办公体验",desc:"体验一个你没用过的AI办公工具，记录使用感受。"}},
+        15: {title:"第一阶段复盘",phase:1,
+            concept:{title:"回顾与展望",points:["第一阶段核心：理解AI本质，掌握基础工具","回顾Day1-14学到的内容","制定第二阶段学习计划"]},
+            news:{items:["第一阶段完成！","第二阶段预告：Prompt工程与信息处理"]},
+            cases:[{title:"回顾",desc:"Day1-14核心知识点","type":"复盘"},{title:"总结",desc:"AI工具掌握情况","type":"复盘"},{title:"计划",desc:"第二阶段目标","type":"复盘"},{title:"实践",desc:"AI融入工作流的程度","type":"复盘"},{title:"反馈",desc:"学习心得与建议","type":"复盘"}],
+            homework:{title:"阶段复盘",desc:"用费曼学习法，向朋友解释什么是Prompt。列出你工作中最想用AI解决的3个问题。"}}
+    };
 
     let currentDay = 1;
     const STORAGE_KEY = 'ai_learning_progress';
@@ -191,7 +230,7 @@
     function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000); }
 
     function openModal(type){
-        const d=daysData.find(x=>x.day===currentDay); if(!d)return;
+        const d=courseData[currentDay]; if(!d)return;
         let title='', content='';
         
         if(type==='concept'){
@@ -202,7 +241,7 @@
             content=`<div class="detail-section"><ul>${d.news.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
         }else if(type==='cases'){
             title='💡 AI实例';
-            content=`<div class="detail-section">${d.cases.map(c=>`<div class="case-item"><div class="case-title">${c.title}</div><div class="case-desc">${c.desc}</div></div>`).join('')}</div>`;
+            content=`<div class="detail-section">${d.cases.map(c=>`<div class="case-item"><div class="case-title">${c.title} <span style="font-size:11px;color:#9ca3af;background:#f3f4f6;padding:2px 6px;border-radius:4px;">${c.type}</span></div><div class="case-desc">${c.desc}</div></div>`).join('')}</div>`;
         }else if(type==='homework'){
             title='🎯 实战作业';
             content=`<div class="homework-box"><h4>${d.homework.title}</h4><p>${d.homework.desc}</p></div>`;
@@ -212,7 +251,7 @@
         const isDone=p.completedDays.includes(currentDay);
         content+=`<button class="check-btn ${isDone?'checked':''}" ${isDone?'disabled':''} onclick="checkIn(${currentDay})">${isDone?'✓ 已打卡':'✅ 打卡完成今日学习'}</button>`;
         
-        document.getElementById('modalDay').textContent='Day '+currentDay+' · '+d.title;
+        document.getElementById('modalDay').textContent='Day '+currentDay+' · 阶段'+d.phase;
         document.getElementById('modalTitle').textContent=title;
         document.getElementById('modalContent').innerHTML=content;
         document.getElementById('modalOverlay').classList.add('active');
@@ -225,14 +264,50 @@
         document.getElementById('currentStreak').textContent=p.currentStreak;
         document.getElementById('totalProgress').textContent=Math.round(c.length)+'%';
         
-        document.querySelectorAll('.day-tab').forEach(t=>{const d=parseInt(t.dataset.day);t.classList.remove('current','completed');if(c.includes(d))t.classList.add('completed');else if(d===c.length+1||(c.length===0&&d===1))t.classList.add('current');});
+        // 渲染Day tabs - 只显示已完成和当天的
+        const dayTabs=document.getElementById('dayTabs');
+        const maxDay=Math.max(c.length+1,15); // 暂时显示前15天
+        let tabsHTML='';
+        for(let i=1;i<=maxDay;i++){
+            let cls='day-tab';
+            if(c.includes(i))cls+=' completed';
+            else if(i===c.length+1)cls+=' current';
+            else if(i>c.length+1)cls+=' locked';
+            tabsHTML+=`<button class="${cls}" data-day="${i}">Day ${i}</button>`;
+        }
+        dayTabs.innerHTML=tabsHTML;
         
+        // 更新当前显示的日期
+        const today=c.length>0?c.length:1;
+        currentDay=today;
+        const dayData=courseData[currentDay];
+        if(dayData){
+            document.getElementById('currentDayTitle').textContent='Day '+currentDay+' · '+dayData.title;
+        }
+        
+        // Timeline高亮
         let currentPhase=1;
         if(c.length>=76)currentPhase=5;else if(c.length>=51)currentPhase=4;else if(c.length>=31)currentPhase=3;else if(c.length>=16)currentPhase=2;
         document.querySelectorAll('.timeline-item').forEach((item,i)=>{item.classList.toggle('active',i+1===currentPhase);});
+        
+        // Day tab点击事件
+        document.querySelectorAll('.day-tab').forEach(tab=>{
+            tab.addEventListener('click',function(){
+                if(this.classList.contains('locked')){
+                    showToast('请先完成前面的学习');
+                    return;
+                }
+                currentDay=parseInt(this.dataset.day);
+                const d=courseData[currentDay];
+                if(d){
+                    document.getElementById('currentDayTitle').textContent='Day '+currentDay+' · '+d.title;
+                    document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('current'));
+                    this.classList.add('current');
+                }
+            });
+        });
     }
 
-    document.getElementById('dayTabs').addEventListener('click',function(e){if(e.target.classList.contains('day-tab')){currentDay=parseInt(e.target.dataset.day);document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('current'));e.target.classList.add('current');}});
     document.querySelectorAll('.timeline-item').forEach(item=>{item.addEventListener('click',function(){document.querySelectorAll('.timeline-item').forEach(i=>i.classList.remove('active'));this.classList.add('active');});});
     document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
     renderAll();
